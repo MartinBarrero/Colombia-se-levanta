@@ -15,6 +15,45 @@ const formatCOP = (value: number) =>
     maximumFractionDigits: 0,
   }).format(value);
 
+const BOLD_SCRIPT_SRC = "https://checkout.bold.co/library/boldPaymentButton.js";
+
+declare global {
+  interface Window {
+    BoldCheckout?: new (config: {
+      orderId: string;
+      currency: string;
+      amount: string;
+      apiKey: string;
+      integritySignature: string;
+      description?: string;
+      redirectionUrl?: string;
+    }) => { open: () => void };
+  }
+}
+
+function cargarScriptBold(): Promise<void> {
+  if (window.BoldCheckout) return Promise.resolve();
+
+  const existing = document.querySelector<HTMLScriptElement>(
+    `script[src="${BOLD_SCRIPT_SRC}"]`
+  );
+  if (existing) {
+    return new Promise((resolve, reject) => {
+      existing.addEventListener("load", () => resolve());
+      existing.addEventListener("error", () => reject(new Error("No se pudo cargar Bold.")));
+    });
+  }
+
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = BOLD_SCRIPT_SRC;
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("No se pudo cargar Bold."));
+    document.body.appendChild(script);
+  });
+}
+
 export function DonationForm() {
   const montoId = useId();
   const nombreId = useId();
@@ -25,26 +64,60 @@ export function DonationForm() {
   const [email, setEmail] = useState("");
   const [anonimo, setAnonimo] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [enviando, setEnviando] = useState(false);
 
   const montoFinal = Number(monto) || 0;
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!montoFinal || montoFinal <= 0) {
       setError("Escribe un monto válido para donar.");
       return;
     }
-    setError(null);
 
-    // TODO: reemplazar por la llamada real a /api/checkout (Bold + Supabase).
-    console.log("Donación (aún no conectada a Bold/Supabase):", {
-      monto: montoFinal,
-      moneda: "COP",
-      nombreDonante: anonimo ? null : nombre || null,
-      emailDonante: anonimo ? null : email || null,
-      anonimo,
-    });
+    setError(null);
+    setEnviando(true);
+
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          monto: montoFinal,
+          nombreDonante: anonimo ? null : nombre || null,
+          emailDonante: anonimo ? null : email || null,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("No se pudo iniciar el pago. Intenta de nuevo.");
+      }
+
+      const { orderId, amount, currency, apiKey, integritySignature } = await res.json();
+
+      await cargarScriptBold();
+
+      if (!window.BoldCheckout) {
+        throw new Error("No se pudo cargar Bold. Intenta de nuevo.");
+      }
+
+      const checkout = new window.BoldCheckout({
+        orderId,
+        currency,
+        amount: String(amount),
+        apiKey,
+        integritySignature,
+        description: "Donación - Colombia se levanta",
+        redirectionUrl: `${window.location.origin}/`,
+      });
+
+      checkout.open();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "No se pudo iniciar el pago.");
+    } finally {
+      setEnviando(false);
+    }
   }
 
   return (
@@ -104,14 +177,13 @@ export function DonationForm() {
             </p>
           )}
 
-          <Button type="submit" size="lg" className="h-12 w-full text-base">
-            Donar {montoFinal > 0 ? formatCOP(montoFinal) : ""}
+          <Button type="submit" size="lg" className="h-12 w-full text-base" disabled={enviando}>
+            {enviando ? "Procesando..." : `Donar ${montoFinal > 0 ? formatCOP(montoFinal) : ""}`}
           </Button>
 
           <p className="text-center text-xs text-muted-foreground">
-            El pago se procesa de forma segura a través de Bold. Aún no está
-            conectado: por ahora este formulario solo registra la donación en
-            la consola.
+            El pago se procesa de forma segura a través de Bold. No almacenamos
+            los datos de tu tarjeta.
           </p>
         </form>
       </CardContent>

@@ -50,8 +50,8 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
 SUPABASE_SECRET_KEY=              # server-only
 NEXT_PUBLIC_BOLD_IDENTITY_KEY=    # llave de identidad, pública, se usa en el botón
-BOLD_SECRET_KEY=                  # server-only, para firmar integrity signature
-BOLD_WEBHOOK_SECRET=              # si Bold la provee, para validar el webhook
+BOLD_SECRET_KEY=                  # server-only, firma integrity signature Y valida el
+                                   # webhook (Bold no da una llave de webhook aparte)
 NEXT_PUBLIC_SITE_URL=             # https://colombiaselevanta.vercel.app o dominio propio
 ```
 Nunca commitear `.env.local`. Confirmar que `.gitignore` lo excluye.
