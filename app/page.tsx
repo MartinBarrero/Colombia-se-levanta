@@ -136,10 +136,7 @@ export default function Home() {
                   <h3 className="font-medium">¿Quién organiza esta campaña?</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  [Placeholder: nombre de la persona, organización o alianza que
-                  organiza esta recaudación. Incluir aquí la entidad legalmente
-                  registrada a través de la cual se canalizan los fondos, por
-                  ejemplo Cruz Roja Colombiana, Bomberos o una alcaldía.]
+                  Martín Barrero López
                 </p>
               </CardContent>
             </Card>
@@ -185,8 +182,6 @@ export default function Home() {
                 <p className="text-sm text-muted-foreground">
                   Los pagos se procesan a través de Bold, una pasarela de pagos
                   certificada. No almacenamos los datos de tu tarjeta.
-                  [Placeholder: confirmar si aplican beneficios tributarios antes
-                  de anunciarlos.]
                 </p>
               </CardContent>
             </Card>
