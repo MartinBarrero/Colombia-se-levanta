@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProgressBar } from "@/components/progress-bar";
 
-const META_RECAUDACION = 500_000_000;
+const META_RECAUDACION = 4_000_000;
 
 interface Stats {
   total: number;
