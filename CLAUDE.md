@@ -38,15 +38,17 @@ fricción en el flujo de donación.
    directo a la tabla cruda sin RLS.
 
 **Regla de oro de seguridad**: la llave secreta de Bold (`BOLD_SECRET_KEY`) y el
-`SUPABASE_SERVICE_ROLE_KEY` **jamás** se usan ni exponen en código de cliente
+`SUPABASE_SECRET_KEY` **jamás** se usan ni exponen en código de cliente
 (`"use client"`, archivos en `app/**/page.tsx` que corran en browser, etc.). Solo en
 Route Handlers / Server Actions.
 
 ## Variables de entorno (definir en Vercel y en `.env.local`)
+Usamos el sistema nuevo de API keys de Supabase (publishable/secret), no el legacy
+anon/service_role.
 ```
 NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=        # server-only
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+SUPABASE_SECRET_KEY=              # server-only
 NEXT_PUBLIC_BOLD_IDENTITY_KEY=    # llave de identidad, pública, se usa en el botón
 BOLD_SECRET_KEY=                  # server-only, para firmar integrity signature
 BOLD_WEBHOOK_SECRET=              # si Bold la provee, para validar el webhook
@@ -90,8 +92,8 @@ app/
     webhooks/bold/route.ts     # recibe confirmación de pago
     stats/route.ts             # expone total recaudado (cacheable)
 lib/
-  supabase/server.ts           # cliente Supabase server-side (service role)
-  supabase/client.ts           # cliente Supabase browser (anon key, solo lecturas públicas)
+  supabase/server.ts           # cliente Supabase server-side (secret key)
+  supabase/client.ts           # cliente Supabase browser (publishable key, solo lecturas públicas)
   bold.ts                      # helpers: generar orderId, calcular integrity signature
 components/
   ui/                          # shadcn

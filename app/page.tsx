@@ -5,12 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ProgressBar } from "@/components/progress-bar";
-
-// TODO: reemplazar por datos reales desde la vista `total_recaudado` de Supabase.
-const TOTAL_RECAUDADO = 0;
-const META_RECAUDACION = 500_000_000;
-const NUM_DONACIONES = 0;
+import { TotalRecaudadoCard } from "@/components/total-recaudado-card";
 
 export default function Home() {
   return (
@@ -53,18 +48,7 @@ export default function Home() {
             </div>
           </div>
 
-          <Card className="ring-foreground/10">
-            <CardContent className="space-y-4">
-              <p className="text-sm font-medium text-muted-foreground">
-                Total recaudado
-              </p>
-              <ProgressBar
-                totalRecaudado={TOTAL_RECAUDADO}
-                meta={META_RECAUDACION}
-                numDonaciones={NUM_DONACIONES}
-              />
-            </CardContent>
-          </Card>
+          <TotalRecaudadoCard />
         </div>
       </section>
 

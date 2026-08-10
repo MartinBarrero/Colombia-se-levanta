@@ -3,7 +3,7 @@ reporta el resultado de cada punto (no asumas, corre los comandos):
 
 1. `npm run build` — debe terminar sin errores de tipos ni de build.
 2. Confirma que no hay ninguna llave secreta (`BOLD_SECRET_KEY`,
-   `SUPABASE_SERVICE_ROLE_KEY`, `BOLD_WEBHOOK_SECRET`) referenciada en ningún archivo
+   `SUPABASE_SECRET_KEY`, `BOLD_WEBHOOK_SECRET`) referenciada en ningún archivo
    que se ejecute en el cliente (busca imports de esos nombres fuera de
    `app/api/**` y `lib/supabase/server.ts` / `lib/bold.ts` si son server-only).
 3. Confirma que `.env.local` está en `.gitignore` y que no fue commiteado nunca
