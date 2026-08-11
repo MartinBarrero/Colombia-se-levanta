@@ -52,6 +52,69 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pereira te necesita */}
+      <section id="pereira" className="bg-muted/40">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+            Pereira te necesita
+          </h2>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+            <img
+              src="/images/pereira-1.jpeg"
+              alt="Pereira tras el terremoto del 10 de agosto de 2026"
+              className="w-full rounded-lg bg-muted object-cover ring-1 ring-foreground/10"
+            />
+            <img
+              src="/images/pereira-2.jpeg"
+              alt="Pereira tras el terremoto del 10 de agosto de 2026"
+              className="w-full rounded-lg bg-muted object-cover ring-1 ring-foreground/10"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Links para ayudar */}
+      <section id="links-ayudar" className="bg-background">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+            Links para ayudar
+          </h2>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button
+              size="lg"
+              className="h-12 px-6 text-base"
+              nativeButton={false}
+              render={
+                <a
+                  href="https://colombiatebusca.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+            >
+              Colombia te busca
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-12 px-6 text-base"
+              nativeButton={false}
+              render={
+                <a
+                  href="https://vaki.co/vaki/sismocolombia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                />
+              }
+            >
+              Vaki
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Videos */}
       <section id="videos" className="bg-background">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
