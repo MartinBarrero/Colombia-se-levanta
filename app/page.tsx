@@ -59,7 +59,7 @@ export default function Home() {
             Pereira te necesita
           </h2>
 
-          <div className="mt-10 grid max-w-2xl gap-6 sm:grid-cols-2">
+          <div className="mt-10 grid max-w-4xl gap-6 sm:grid-cols-3">
             <img
               src="/images/pereira-1.jpeg"
               alt="Pereira tras el terremoto del 10 de agosto de 2026"
@@ -67,6 +67,11 @@ export default function Home() {
             />
             <img
               src="/images/pereira-2.jpeg"
+              alt="Pereira tras el terremoto del 10 de agosto de 2026"
+              className="w-full rounded-lg bg-muted object-cover ring-1 ring-foreground/10"
+            />
+            <img
+              src="/images/pereira-3.jpeg"
               alt="Pereira tras el terremoto del 10 de agosto de 2026"
               className="w-full rounded-lg bg-muted object-cover ring-1 ring-foreground/10"
             />
