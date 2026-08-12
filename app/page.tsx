@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ShieldCheck, HeartHandshake, MapPin, Users } from "lucide-react";
+import { ShieldCheck, HeartHandshake, Users, Check, CheckCircle2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { TotalRecaudadoCard } from "@/components/total-recaudado-card";
@@ -150,7 +150,7 @@ export default function Home() {
                   controls
                   preload="metadata"
                   playsInline
-                  className="w-full rounded-lg bg-muted ring-1 ring-foreground/10"
+                  className="aspect-video w-full rounded-lg bg-muted object-cover ring-1 ring-foreground/10"
                 >
                   Tu navegador no soporta la reproducción de este video.
                 </video>
@@ -159,7 +159,7 @@ export default function Home() {
                   key={item.src}
                   src={item.src}
                   alt="Registro de la zona afectada por el terremoto"
-                  className="w-full rounded-lg bg-muted object-cover ring-1 ring-foreground/10"
+                  className="aspect-video w-full rounded-lg bg-muted object-cover ring-1 ring-foreground/10"
                 />
               )
             )}
@@ -180,13 +180,15 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
-              <CardContent className="space-y-3">
+              <CardHeader>
                 <div className="flex items-center gap-2 text-foreground">
                   <Users className="size-5" aria-hidden="true" />
-                  <h3 className="font-medium">¿Quién organiza esta campaña?</h3>
+                  <CardTitle>¿Quién organiza esta campaña?</CardTitle>
                 </div>
+              </CardHeader>
+              <CardContent>
                 <p className="text-sm text-muted-foreground">
                   Martín Barrero López
                 </p>
@@ -194,11 +196,13 @@ export default function Home() {
             </Card>
 
             <Card>
-              <CardContent className="space-y-3">
+              <CardHeader>
                 <div className="flex items-center gap-2 text-foreground">
                   <HeartHandshake className="size-5" aria-hidden="true" />
-                  <h3 className="font-medium">¿A dónde va el dinero?</h3>
+                  <CardTitle>¿A dónde va el dinero?</CardTitle>
                 </div>
+              </CardHeader>
+              <CardContent>
                 <p className="text-sm text-muted-foreground">
                   El dinero recaudado será puesto a disposición de las
                   organizaciones que lo requieran para la respuesta a la
@@ -211,32 +215,39 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardContent className="space-y-3">
-                <div className="flex items-center gap-2 text-foreground">
-                  <MapPin className="size-5" aria-hidden="true" />
-                  <h3 className="font-medium">Zonas afectadas</h3>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Chocó (epicentro), Cali, Pereira, Manizales y municipios de la
-                  zona cafetera. [Placeholder: actualizar con el detalle real de
-                  cobertura de la respuesta.]
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="space-y-3">
+            <Card className="sm:col-span-2 lg:col-span-1">
+              <CardHeader>
                 <div className="flex items-center gap-2 text-foreground">
                   <ShieldCheck className="size-5" aria-hidden="true" />
-                  <h3 className="font-medium">Seguridad de tu donación</h3>
+                  <CardTitle>Seguridad de tu donación</CardTitle>
                 </div>
+              </CardHeader>
+              <CardContent>
                 <p className="text-sm text-muted-foreground">
                   Los pagos se procesan a través de Bold, una pasarela de pagos
                   certificada. No almacenamos los datos de tu tarjeta.
                 </p>
               </CardContent>
             </Card>
+          </div>
+
+          <div className="mt-8 rounded-xl bg-background p-6 ring-1 ring-foreground/10 sm:p-8">
+            <div className="flex items-center gap-2 text-foreground">
+              <CheckCircle2 className="size-5" aria-hidden="true" />
+              <h3 className="font-medium">Nuestro compromiso de transparencia</h3>
+            </div>
+            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+              {[
+                "El total recaudado se actualiza automáticamente con cada donación aprobada.",
+                "Respondemos dudas sobre la campaña en colombiaselevanta2026@gmail.com.",
+                "Al finalizar la respuesta a la emergencia, publicaremos un resumen de cómo se usaron los fondos.",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <Check className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
