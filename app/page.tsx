@@ -150,7 +150,7 @@ export default function Home() {
                   controls
                   preload="metadata"
                   playsInline
-                  className="w-full rounded-lg bg-muted ring-1 ring-foreground/10"
+                  className="aspect-video w-full rounded-lg bg-muted object-cover ring-1 ring-foreground/10"
                 >
                   Tu navegador no soporta la reproducción de este video.
                 </video>
@@ -159,7 +159,7 @@ export default function Home() {
                   key={item.src}
                   src={item.src}
                   alt="Registro de la zona afectada por el terremoto"
-                  className="w-full rounded-lg bg-muted object-cover ring-1 ring-foreground/10"
+                  className="aspect-video w-full rounded-lg bg-muted object-cover ring-1 ring-foreground/10"
                 />
               )
             )}
