@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
-import { DonationForm } from "@/components/donation-form";
+import { Card, CardContent } from "@/components/ui/card";
+
+const EMAIL_CONTACTO = "colombiaselevanta2026@gmail.com";
 
 export default function DonarPage() {
   return (
@@ -17,15 +19,28 @@ export default function DonarPage() {
 
         <div className="mb-8 space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            Haz tu donación
+            Gracias por tu intención
           </h1>
           <p className="text-muted-foreground">
-            Cada aporte ayuda a la respuesta de emergencia por el terremoto del
-            10 de agosto de 2026.
+            En este momento ya se ha cerrado la campaña.
           </p>
         </div>
 
-        <DonationForm />
+        <Card>
+          <CardContent>
+            <p className="text-sm text-muted-foreground">
+              Si estás interesado en hacer alguna donación, puedes comunicarte
+              directamente a{" "}
+              <a
+                href={`mailto:${EMAIL_CONTACTO}`}
+                className="text-foreground underline underline-offset-4"
+              >
+                {EMAIL_CONTACTO}
+              </a>
+              .
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </main>
   );

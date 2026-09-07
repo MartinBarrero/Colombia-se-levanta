@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { TotalRecaudadoCard } from "@/components/total-recaudado-card";
+import { CampaignClosedDialog } from "@/components/campaign-closed-dialog";
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 md:items-center md:py-24 lg:px-8">
           <div className="space-y-6">
             <Badge className="bg-urgent text-urgent-foreground">
-              Emergencia activa · Terremoto del 10 de agosto de 2026
+              Terremoto del 10 de agosto de 2026
             </Badge>
             <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               Colombia se levanta
@@ -28,14 +29,13 @@ export default function Home() {
               sin importar el monto, ayuda a la respuesta de emergencia.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Button
-                size="lg"
-                className="h-12 px-6 text-base"
-                nativeButton={false}
-                render={<Link href="/donar" />}
-              >
-                Donar ahora
-              </Button>
+              <CampaignClosedDialog
+                trigger={
+                  <Button size="lg" className="h-12 px-6 text-base">
+                    Donar ahora
+                  </Button>
+                }
+              />
               <Button
                 size="lg"
                 variant="outline"
